@@ -1,0 +1,13 @@
+{
+  "name": "Viber5",
+  "short_name": "Viber5",
+  "description": "Listen to any music, anywhere",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#121212",
+  "theme_color": "#1DB954",
+  "orientation": "portrait",
+  "icons": [
+    { "src": "icons/icon.svg", "sizes": "any", "type": "image/svg+xml", "purpose": "any maskable" }
+  ]
+}

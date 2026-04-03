@@ -1,0 +1,388 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+  <meta name="theme-color" content="#1DB954" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+  <link rel="manifest" href="manifest.json" />
+  <link rel="stylesheet" href="style.css" />
+  <title>Viber5</title>
+</head>
+<body>
+<!-- ══════════════ AUTH WRAP ══════════════ -->
+<div id="auth-wrap">
+  <div class="auth-logo">Viber5</div>
+  <div class="auth-tagline">Music for every moment</div>
+
+  <!-- Sign In page -->
+  <div class="auth-card">
+    <div id="auth-signin" class="auth-page active">
+      <h2>Welcome back</h2>
+      <p>Sign in to your account</p>
+      <div class="auth-error" id="signin-error"></div>
+      <div class="auth-field">
+        <label>Email</label>
+        <input id="signin-email" type="email" placeholder="you@example.com" autocomplete="email" />
+      </div>
+      <div class="auth-field">
+        <label>Password</label>
+        <input id="signin-password" type="password" placeholder="Your password" autocomplete="current-password" />
+      </div>
+      <button class="auth-btn" id="signin-btn">Sign In</button>
+      <div class="auth-divider"><span>or</span></div>
+      <button class="auth-google-btn" id="google-signin-btn">
+        <svg viewBox="0 0 48 48" width="20" height="20"><path fill="#FFC107" d="M43.6 20.1H42V20H24v8h11.3C33.7 32.7 29.2 36 24 36c-6.6 0-12-5.4-12-12s5.4-12 12-12c3.1 0 5.8 1.1 7.9 2.9l5.7-5.7C34.5 6.5 29.5 4 24 4 12.9 4 4 12.9 4 24s8.9 20 20 20 20-8.9 20-20c0-1.3-.1-2.6-.4-3.9z"/><path fill="#FF3D00" d="m6.3 14.7 6.6 4.8C14.5 16 19 12 24 12c3.1 0 5.8 1.1 7.9 2.9l5.7-5.7C34.5 6.5 29.5 4 24 4 16.3 4 9.7 8.3 6.3 14.7z"/><path fill="#4CAF50" d="M24 44c5.2 0 9.9-2 13.4-5.2l-6.2-5.2C29.3 35.5 26.8 36 24 36c-5.2 0-9.6-3.3-11.3-7.9l-6.5 5C9.5 39.6 16.2 44 24 44z"/><path fill="#1976D2" d="M43.6 20.1H42V20H24v8h11.3c-.8 2.3-2.3 4.3-4.3 5.6l6.2 5.2C36.9 36.2 44 31 44 24c0-1.3-.1-2.6-.4-3.9z"/></svg>
+        Continue with Google
+      </button>
+      <div class="auth-switch">Don't have an account? <a onclick="showAuthPage('auth-signup')">Sign Up</a></div>
+    </div>
+
+    <!-- Sign Up page -->
+    <div id="auth-signup" class="auth-page">
+      <button class="auth-back" onclick="showAuthPage('auth-signin')">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="m15 18-6-6 6-6"/></svg>
+        Back
+      </button>
+      <h2>Create account</h2>
+      <p>Enter your details to get started</p>
+      <div class="auth-error" id="signup-error"></div>
+      <div class="auth-field">
+        <label>Full Name</label>
+        <input id="signup-name" type="text" placeholder="Your name" autocomplete="name" />
+      </div>
+      <div class="auth-field">
+        <label>Email</label>
+        <input id="signup-email" type="email" placeholder="you@example.com" autocomplete="email" />
+      </div>
+      <div class="auth-field">
+        <label>Password</label>
+        <input id="signup-password" type="password" placeholder="At least 6 characters" autocomplete="new-password" />
+      </div>
+      <div class="auth-field">
+        <label>Confirm Password</label>
+        <input id="signup-confirm" type="password" placeholder="Repeat password" autocomplete="new-password" />
+      </div>
+      <button class="auth-btn" id="signup-btn">Send Verification Code</button>
+      <div class="auth-divider"><span>or</span></div>
+      <button class="auth-google-btn" id="google-signup-btn">
+        <svg viewBox="0 0 48 48" width="20" height="20"><path fill="#FFC107" d="M43.6 20.1H42V20H24v8h11.3C33.7 32.7 29.2 36 24 36c-6.6 0-12-5.4-12-12s5.4-12 12-12c3.1 0 5.8 1.1 7.9 2.9l5.7-5.7C34.5 6.5 29.5 4 24 4 12.9 4 4 12.9 4 24s8.9 20 20 20 20-8.9 20-20c0-1.3-.1-2.6-.4-3.9z"/><path fill="#FF3D00" d="m6.3 14.7 6.6 4.8C14.5 16 19 12 24 12c3.1 0 5.8 1.1 7.9 2.9l5.7-5.7C34.5 6.5 29.5 4 24 4 16.3 4 9.7 8.3 6.3 14.7z"/><path fill="#4CAF50" d="M24 44c5.2 0 9.9-2 13.4-5.2l-6.2-5.2C29.3 35.5 26.8 36 24 36c-5.2 0-9.6-3.3-11.3-7.9l-6.5 5C9.5 39.6 16.2 44 24 44z"/><path fill="#1976D2" d="M43.6 20.1H42V20H24v8h11.3c-.8 2.3-2.3 4.3-4.3 5.6l6.2 5.2C36.9 36.2 44 31 44 24c0-1.3-.1-2.6-.4-3.9z"/></svg>
+        Continue with Google
+      </button>
+      <div class="auth-switch">Already have an account? <a onclick="showAuthPage('auth-signin')">Sign In</a></div>
+    </div>
+
+    <!-- Verify page -->
+    <div id="auth-verify" class="auth-page">
+      <button class="auth-back" onclick="showAuthPage('auth-signup')">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="m15 18-6-6 6-6"/></svg>
+        Back
+      </button>
+      <h2>Check your email</h2>
+      <p id="verify-subtitle">We sent a 6-digit code to your email. Enter it below.</p>
+      <div class="auth-error" id="verify-error"></div>
+      <div class="auth-success" id="verify-success"></div>
+      <div class="code-inputs">
+        <input class="code-digit" maxlength="1" type="text" inputmode="numeric" pattern="[0-9]" />
+        <input class="code-digit" maxlength="1" type="text" inputmode="numeric" pattern="[0-9]" />
+        <input class="code-digit" maxlength="1" type="text" inputmode="numeric" pattern="[0-9]" />
+        <input class="code-digit" maxlength="1" type="text" inputmode="numeric" pattern="[0-9]" />
+        <input class="code-digit" maxlength="1" type="text" inputmode="numeric" pattern="[0-9]" />
+        <input class="code-digit" maxlength="1" type="text" inputmode="numeric" pattern="[0-9]" />
+      </div>
+      <button class="auth-btn" id="verify-btn">Verify & Create Account</button>
+      <div class="auth-switch"><a id="resend-code-btn">Resend code</a></div>
+    </div>
+  </div>
+</div>
+
+<div id="app">
+
+  <!-- ══════════════ HOME SCREEN ══════════════ -->
+  <div id="screen-home" class="screen active">
+    <div class="screen-header">
+      <span class="logo">Viber5</span>
+    </div>
+    <div class="scroll-area" id="home-scroll">
+      <div class="chips-row" id="genre-chips"></div>
+      <div id="home-sections"></div>
+    </div>
+  </div>
+
+  <!-- ══════════════ SEARCH SCREEN ══════════════ -->
+  <div id="screen-search" class="screen">
+    <div class="screen-header"><h1>Search</h1></div>
+    <div class="search-bar">
+      <div class="search-input-wrap">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
+        <input id="search-input" type="text" placeholder="Search songs, artists..." />
+        <button class="search-clear" id="search-clear">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="m15 9-6 6M9 9l6 6"/></svg>
+        </button>
+      </div>
+      <button class="search-go-btn" id="search-go">Search</button>
+    </div>
+    <div id="search-results" class="scroll-area"></div>
+  </div>
+
+  <!-- ══════════════ ARTISTS SCREEN ══════════════ -->
+  <div id="screen-artists" class="screen">
+    <div class="screen-header"><h1>Artists</h1></div>
+    <div class="search-bar">
+      <div class="search-input-wrap">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
+        <input id="artist-search-input" type="text" placeholder="Search artists..." />
+        <button class="search-clear" id="artist-search-clear">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="m15 9-6 6M9 9l6 6"/></svg>
+        </button>
+      </div>
+      <button class="search-go-btn" id="artist-search-go">Search</button>
+    </div>
+    <div class="scroll-area">
+      <div id="artists-grid" class="artists-grid"></div>
+      <div id="artists-loader"></div>
+    </div>
+  </div>
+
+  <!-- ══════════════ ARTIST PROFILE ══════════════ -->
+  <div id="screen-artist-profile" class="screen">
+    <div class="screen-header">
+      <button class="back-btn" id="artist-back">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="m15 18-6-6 6-6"/></svg>
+      </button>
+      <div class="artist-profile-header" style="padding:0;border:none;flex:1;">
+        <img id="ap-avatar" class="artist-profile-avatar" src="" alt="" />
+        <div>
+          <div id="ap-name" class="artist-profile-name"></div>
+        </div>
+      </div>
+    </div>
+    <div class="search-bar">
+      <div class="search-input-wrap">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
+        <input id="ap-search-input" type="text" placeholder="Search this artist's songs..." />
+        <button class="search-clear" id="ap-search-clear">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="m15 9-6 6M9 9l6 6"/></svg>
+        </button>
+      </div>
+      <button class="search-go-btn" id="ap-search-go">Go</button>
+    </div>
+    <div class="sort-row">
+      <button class="sort-chip active" data-sort="date">Newest</button>
+      <button class="sort-chip" data-sort="viewCount">Popular</button>
+      <button class="sort-chip" data-sort="az">A – Z</button>
+      <button class="sort-chip" data-sort="za">Z – A</button>
+    </div>
+    <div id="ap-songs" class="scroll-area"></div>
+  </div>
+
+  <!-- ══════════════ PLAYER SCREEN ══════════════ -->
+  <div id="screen-player" class="screen">
+    <div class="screen-header">
+      <button class="back-btn" id="player-back">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="m15 18-6-6 6-6"/></svg>
+      </button>
+      <h1 style="flex:1;font-size:16px;">Now Playing</h1>
+    </div>
+    <div class="scroll-area" style="overflow:hidden;">
+      <div id="player-cover-wrap">
+        <div id="yt-player-wrap"><div id="yt-player"></div></div>
+        <img id="player-cover" src="" alt="" />
+        <div id="ad-badge">AD</div>
+      </div>
+      <div id="player-info">
+        <div id="player-title">—</div>
+        <div id="player-artist">—</div>
+      </div>
+      <div id="player-controls">
+        <button id="btn-fav" title="Favorite">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+        </button>
+        <button id="btn-prev">
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M6 6h2v12H6zm3.5 6 8.5 6V6z"/></svg>
+        </button>
+        <button id="btn-play-pause">
+          <svg id="icon-play" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
+          <svg id="icon-pause" viewBox="0 0 24 24" fill="currentColor" style="display:none"><path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"/></svg>
+        </button>
+        <button id="btn-next">
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M6 18l8.5-6L6 6v12zM16 6v12h2V6h-2z"/></svg>
+        </button>
+        <button id="btn-queue">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 6h18M3 12h18M3 18h12"/></svg>
+        </button>
+      </div>
+      <div id="player-extra">
+        <button id="btn-add-playlist">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+          Add to Playlist
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ══════════════ LIBRARY SCREEN ══════════════ -->
+  <div id="screen-library" class="screen">
+    <div class="screen-header"><h1>Library</h1></div>
+    <div class="scroll-area">
+      <div class="lib-section">
+        <h2>Your Music</h2>
+        <button class="lib-btn" id="lib-favorites-btn">
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+          <span>Favorites</span>
+        </button>
+        <button class="lib-btn" id="lib-playlists-btn">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 6h18M3 12h18M3 18h12"/></svg>
+          <span>Playlists</span>
+        </button>
+        <button class="lib-btn" id="lib-offline-btn">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+          <span>Offline / Downloads</span>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ══════════════ FAVORITES ══════════════ -->
+  <div id="screen-favorites" class="screen">
+    <div class="screen-header">
+      <button class="back-btn" id="fav-back">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="m15 18-6-6 6-6"/></svg>
+      </button>
+      <h1>Favorites</h1>
+    </div>
+    <div id="fav-list" class="scroll-area"></div>
+  </div>
+
+  <!-- ══════════════ PLAYLISTS ══════════════ -->
+  <div id="screen-playlists" class="screen">
+    <div class="screen-header">
+      <button class="back-btn" id="playlists-back">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="m15 18-6-6 6-6"/></svg>
+      </button>
+      <h1>Playlists</h1>
+    </div>
+    <div class="scroll-area">
+      <button class="import-btn" id="new-playlist-btn">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+        New Playlist
+      </button>
+      <div id="playlists-list"></div>
+    </div>
+  </div>
+
+  <!-- ══════════════ PLAYLIST DETAIL ══════════════ -->
+  <div id="screen-playlist-detail" class="screen">
+    <div class="screen-header">
+      <button class="back-btn" id="pl-detail-back">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="m15 18-6-6 6-6"/></svg>
+      </button>
+      <h1 id="pl-detail-title"></h1>
+    </div>
+    <div id="pl-detail-songs" class="scroll-area"></div>
+  </div>
+
+  <!-- ══════════════ OFFLINE ══════════════ -->
+  <div id="screen-offline" class="screen">
+    <div class="screen-header">
+      <button class="back-btn" id="offline-back">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="m15 18-6-6 6-6"/></svg>
+      </button>
+      <h1>Offline Music</h1>
+    </div>
+    <div class="scroll-area">
+      <label class="import-btn" id="import-label">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+        Import Audio File
+        <input id="file-input" type="file" accept="audio/*" style="display:none" />
+      </label>
+      <p style="text-align:center;color:var(--text3);font-size:12px;margin-top:-8px;margin-bottom:12px;">Supports MP3, AAC, WAV, FLAC and more</p>
+      <div id="offline-list"></div>
+    </div>
+  </div>
+
+  <!-- ══════════════ MINI PLAYER ══════════════ -->
+  <div id="mini-player">
+    <img id="mini-thumb" src="" alt="" />
+    <div id="mini-info">
+      <div id="mini-title">—</div>
+      <div id="mini-artist">—</div>
+    </div>
+    <div class="mini-controls">
+      <button id="mini-prev">
+        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M6 6h2v12H6zm3.5 6 8.5 6V6z"/></svg>
+      </button>
+      <button id="mini-play-btn">
+        <svg id="mini-icon-play" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
+        <svg id="mini-icon-pause" viewBox="0 0 24 24" fill="currentColor" style="display:none"><path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"/></svg>
+      </button>
+      <button id="mini-next">
+        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M6 18l8.5-6L6 6v12zM16 6v12h2V6h-2z"/></svg>
+      </button>
+    </div>
+  </div>
+
+  <!-- ══════════════ BOTTOM NAV ══════════════ -->
+  <nav id="bottom-nav">
+    <button class="nav-btn active" data-screen="home">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+      Home
+    </button>
+    <button class="nav-btn" data-screen="search">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
+      Search
+    </button>
+    <button class="nav-btn" data-screen="artists">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+      Artists
+    </button>
+    <button class="nav-btn" data-screen="player">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polygon points="10 8 16 12 10 16 10 8"/></svg>
+      Player
+    </button>
+    <button class="nav-btn" data-screen="library">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>
+      Library
+    </button>
+  </nav>
+
+  <!-- ══════════════ MODALS ══════════════ -->
+
+  <!-- Add to playlist modal -->
+  <div class="modal-overlay" id="playlist-modal">
+    <div class="modal-sheet">
+      <h3>Add to Playlist</h3>
+      <div id="playlist-modal-list"></div>
+      <div class="modal-item" id="create-playlist-from-modal" style="margin-top:8px;">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+        <span>Create new playlist</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- New playlist modal -->
+  <div class="modal-overlay" id="new-playlist-modal">
+    <div class="modal-sheet">
+      <h3>New Playlist</h3>
+      <input class="modal-input" id="new-playlist-name" placeholder="Playlist name" />
+      <div class="modal-actions">
+        <button class="btn-cancel" id="new-playlist-cancel">Cancel</button>
+        <button class="btn-confirm" id="new-playlist-confirm">Create</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Queue sheet -->
+  <div class="modal-overlay" id="queue-sheet">
+    <div class="modal-sheet">
+      <h3>Queue</h3>
+      <div id="queue-list"></div>
+    </div>
+  </div>
+
+</div>
+
+<script src="app.js"></script>
+</body>
+</html>
